@@ -1,27 +1,33 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from numpy import linalg
+import os
 
 def main():
-	n = 0
+	points = []
 	x = []
 	x1 = []
 	x2 = []
-	while n <= 1:
-		print "Give me number of points: "
-		n = int(raw_input())
-		if n <= 1 :
-			print "Invalid input, try again"
-			if n == 1:
-				print "Too easy with only one point, give me more."
-		else:
-			break;
-	points = []
-	print "point input format: x y"
-	for i in range(n):
-		print "Give me point #"+str(i+1)+": "
-		point = raw_input()
-		point = point.split(" ")
+	print "Give me name of file: "
+	filename = raw_input()
+	filestring = ""
+	try:
+		with open(filename) as openfile:
+			statinfo = os.stat(filename)
+			while True:
+				buf = openfile.read(42)
+				filestring += buf
+				if not buf: break		
+	except IOError:
+		print "File doesnt exist. Try again"
+
+	filestring = filestring.replace('(', '').replace('\n',' ').replace('\t',' ')
+
+	filestring = filestring.replace(' ','')
+	filestring = filestring.split(")")
+	filestring.pop()
+	for point in filestring:
+		point = point.split(',')
 		points.append(point)
 		x.append(point[1])
 		x1.append(point[0])
@@ -36,7 +42,7 @@ def main():
 	fig = plt.figure()
 	ax = plt.axes()
 
-	for i in range(n):
+	for i in range(len(points)):
 		ax.plot(x1[i],x[i], marker='o', color = 'r')
 
 	print x
@@ -63,8 +69,6 @@ def main():
 	lns = np.linspace(min(x1),max(x1))
 	ax.plot(lns, ab[0]*lns+ab[1] )
 	plt.show()
-
-
 
 
 if __name__ == "__main__":
