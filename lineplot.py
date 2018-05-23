@@ -7,11 +7,13 @@ def main():
 	x = []
 	x1 = []
 	x2 = []
-	while n <= 0:
+	while n <= 1:
 		print "Give me number of points: "
 		n = int(raw_input())
-		if n <= 0 :
+		if n <= 1 :
 			print "Invalid input, try again"
+			if n == 1:
+				print "Too easy with only one point, give me more."
 		else:
 			break;
 	points = []
