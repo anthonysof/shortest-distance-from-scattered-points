@@ -15,7 +15,7 @@ def main():
 		with open(filename) as openfile:
 			statinfo = os.stat(filename)
 			while True:
-				buf = openfile.read(42)
+				buf = openfile.read(statinfo.st_size)
 				filestring += buf
 				if not buf: break		
 	except IOError:
