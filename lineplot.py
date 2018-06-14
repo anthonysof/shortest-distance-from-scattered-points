@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from numpy import linalg
 import os
+import sys
 
 def main():
 	points = []
@@ -20,6 +21,8 @@ def main():
 				if not buf: break		
 	except IOError:
 		print "File doesnt exist. Try again"
+		sys.exit()
+
 
 	filestring = filestring.replace('(', '').replace('\n',' ').replace('\t',' ')
 
